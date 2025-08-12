@@ -1,0 +1,23 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "Привет я Uvazayou Создал это имя в Честь - Уважаю  2 Играю глар ио Проще сказать разные ио игры + Играю кс го - стендофф 2 - роблокс и т. д. 3 Учу JavaScript - css - html - Скоро начну учить discord.js 4 Характер - любопытный веселый - иногда не в настроений. 5 Имя - уважаю, Лет - 13. 6 хочу стать программистом.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marvelcreater/Uvazayou.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Marvelcreater/Uvazayou/issues"
+  },
+  "homepage": "https://github.com/Marvelcreater/Uvazayou#readme",
+  "dependencies": {
+    "puppeteer": "^22.15.0"
+  }
+}
