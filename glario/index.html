@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script>
+ var dataLayer = [{
+  'inGame': 'true'
+}];
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4NZJCH');</script>
+<!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta property="og:title" content="Glar.io: play online!">
+    <meta property="og:description" content="Survive and build your base, defending it from rivals. Fight for glory!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://glar.io">
+    <meta property="og:image" content="assets/cbb07fef4ae9dcee8ca64f536c529629.png">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="assets/ca0b86c3092e637b6aa3dfb6086a9852.ico"/>
+    <title>Glar.io - multiplayer build and destroy!</title>
+    <link rel="canonical" href="https://glar.io/" />
+    <meta name="description" content="Survive and build your base, defending it from rivals. Fight for glory!">
+    <meta name="keywords" content="game,games,gaming,online,io,multiplayer,glory,glorio,village,castle">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Handlee|Roboto|Slabo+27px|Hammersmith One|Open Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/9107a89a9215e268230c4ed3bdee3951.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="assets/6ef6346cad5fde86bb8aeb189068fdc1.js"></script>
+    <script src="assets/3e21894d8358ad3da285b7ab2796b501.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+     <script src="https://glar.io/ga/GameAnalytics.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
+     
+<script defer src="game.min.js"></script></head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4NZJCH"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+<div id="preroll"></div>
+<script>
+    
+    GameAnalytics("setEnabledInfoLog", true);
+
+    GameAnalytics("initialize", "c53e40788114e8ff1770932c092bf745", "844f9c644367df4b1b07ebe47867de4c40912700");
+
+</script>
+
+<script type="text/javascript">
+    function initAipPreroll() {
+        if (typeof aipPlayer != "undefined") {
+            window.adplayer = new aipPlayer({
+                AD_WIDTH: 960,
+                AD_HEIGHT: 540,
+                AD_FULLSCREEN: true,
+                PREROLL_ELEM: document.getElementById('preroll'),
+                AIP_COMPLETE: function () {
+                    /*******************
+                     ***** WARNING *****
+                     *******************
+                     Please do not remove the PREROLL_ELEM
+                     from the page, it will be hidden automaticly.
+                     If you do want to remove it use the AIP_REMOVE callback below
+                     */
+                    if (window.adplayer.onadcompleted) {
+                        window.adplayer.onadcompleted();
+                    }
+                },
+                AIP_REMOVE: function () {
+                    // Here it's save to remove the PREROLL_ELEM from the page
+                    // But it's not necessary
+                }
+            });
+        } else {
+            // Failed to load the adslib ads are probably blocked
+            // don't call the startPreRoll function.
+            // it will result in an error.
+        }
+    }
+
+    function getScript(src, callback) {
+        var headElm = document.head || document.getElementsByTagName('head')[0];
+        var script = document.createElement("script");
+        var once = true;
+        script.async = "async";
+        script.type = "text/javascript";
+        script.charset = "UTF-8";
+        script.src = src;
+        script.onload = script.onreadystatechange = function () {
+            if (once && (!script.readyState || /loaded|complete/.test(script.readyState))) {
+                once = false;
+                callback();
+                script.onload = script.onreadystatechange = null;
+            }
+        };
+
+        headElm.appendChild(script);
+    }
+
+</script>
+<script type="text/javascript">
+    var firstload=true;
+
+    function showInstructions() {
+        if(firstload){
+            $( '#instructions-dialog' ).dialog({
+                width: 600,
+                height: 500,
+                position: { my: "center top", at: "center top", of: window }
+            });
+            firstload=false;
+            $('#instructions-dialog').html('<a href="https://glar.io/tutorial/how-to-play/" target="_blank" style="text-shadow:none !important;">Open in new window</a>');
+            $('#instructions-dialog').append('<iframe data-keep="true" width="100%" height= "480" src="https://glar.io/tutorial/how-to-play/"></iframe><br />');
+         
+         return;   
+        }
+        if($( '#instructions-dialog' ).dialog( 'isOpen' )){
+            $( '#instructions-dialog' ).dialog( 'close' );
+        } else {
+            $( '#instructions-dialog' ).dialog( 'open' );
+        }
+
+    }
+    let firstStoreLoad=true;
+    function showStore(){
+        if(!window.user.hasOwnProperty('id')) {
+            jQuery(window).trigger('console',['Login on the home page to use the store!']);
+            return;
+        }
+        if(firstStoreLoad){
+
+            $( '#store-dialog' ).dialog({
+                width: 'auto',
+                height: 'auto'
+            });
+            $( '#store-dialog' ).show();
+            $('#store-tabs').tabs();
+            firstStoreLoad=false;
+            $('#store-frame').html('');
+            let sid=0;
+            if(undefined != window['glar_server_id']){
+                sid=window['glar_server_id'];
+            }
+            $('#store-frame').append('<iframe id="diamond-store" data-keep="true" frameborder="0" marginwidth="0" marginheight="0" width="400" height="500" allowfullscreen src="https://app.glar.io/store/items?server_id='+sid+'"></iframe><br />');
+            updateAchievements();
+            if(typeof(window.shareUrl)=="undefined"){
+                window.shareUrl="https://glar.io/?r=u0";
+            }
+            if(typeof(window.shareUrl)=="undefined"){
+                window.storeUrl="";
+            } else {
+                jQuery('#store-link').attr('href',window.storeUrl);
+            }
+            let source=jQuery('#share-template').html();
+            jQuery('#share-content').html(source.replaceAll('notscript','script').replaceAll('eURL',escape(window.shareUrl)).replaceAll('URL',window.shareUrl));
+
+            return;
+        } else {
+            
+        }
+        if($( '#store-dialog' ).dialog( 'isOpen' )){
+            $( '#store-dialog' ).dialog( 'close' );
+        } else {
+            $( '#store-dialog' ).dialog( 'open' );
+        }
+        
+    }
+    function showSettings() {        
+        if($( '#settings-dialog' ).dialog( 'isOpen' )){
+            $( '#settings-dialog' ).dialog( 'close' );
+        } else {
+            $( '#settings-dialog' ).dialog( 'open' );
+        }
+    }
+    function showChat() {
+        if($('#chat-input').is(":visible")){
+            $('#chat-input').hide('blind');
+            
+            $(window).trigger('start-input');
+        } else {
+            $('#chat-input').show('blind',{},300,function(){
+                $('#chat-textbox').focus();    
+            });
+            
+            $(window).trigger('stop-input');
+
+        }
+    }
+    function sendChat(){
+        let text=$('#chat-textbox').val();
+        if(text.length==0){ showChat(); }//hide
+        $('#chat-textbox').val('');
+        if($('#chat-type').val() == "Team"){
+            jQuery(window).trigger('chat-input',['t',text])
+        } else if($('#chat-type').val() == "Server"){
+            jQuery(window).trigger('chat-input',['s',text])
+        } else {
+            jQuery(window).trigger('chat-input',['l',text])
+        }
+        $('#chat-textbox').focus();
+        
+    }
+    $(document).ready(function(){
+        $('#chat-textbox').keydown(function(e){
+            switch(e.keyCode){
+                case 13:
+                    sendChat();
+                break;
+                case 27: //escape
+                    $('#chat-textbox').val('');
+                    $('#chat-textbox').blur();
+                    showChat();
+                break;
+            }
+        });
+        $('#chat-textbox').blur(function(){
+            $(window).trigger('start-input');
+        });
+        $('#chat-textbox').focus(function(){
+            $(window).trigger('stop-input');
+        });
+    });
+    function updateAchievements(){
+        updateAchievementsUrl('https://app.glar.io');
+    }
+    
+    function showYoutubers() {
+        document.getElementById('youtubers').style.display = 'block';
+    }
+
+    function hideChangelog() {
+        document.getElementById('changelog').style.display = 'none';
+    }
+    function hideInstructions() {
+        document.getElementById('instructions').style.display = 'none';
+    }
+    function hideYoutubers() {
+        document.getElementById('youtubers').style.display = 'none';
+    }
+    function reload() {
+        window.location.replace('/');
+    }
+    function unmuteAll(){
+        jQuery('style[data-type="mute"]').remove();
+        jQuery('li[data-type="mute"]').remove();
+
+    }
+    function mutePlayer(networkId,name){
+        jQuery('#mute-list').append('<li data-type="mute" data-networkId="'+networkId+'">'+name+' <i onclick="unmutePlayer('+networkId+');" class="fas fa-backspace"></i></li>');
+        jQuery('body').append('<style data-networkId="'+networkId+'" data-type="mute">div.chat[data-networkId="'+networkId+'"] { display:none;}</style>');
+    }
+    function unmutePlayer(networkId){
+        jQuery('style[data-networkId="'+networkId+'"]').remove();
+        jQuery('li[data-networkId="'+networkId+'"]').remove();
+    }
+</script>
+<div class="preloader" id="preloader-screen">
+    <div class="preloader-content">
+        <div class="loading-logo">
+            <img src="assets/abfee1a597bd9ef57b467e1bdc8e4edf.gif" width="223" height="223"/>
+
+            <!-- <img src="assets/f88d12189d02180d760386853df824ee.png" id="preloader" style="transform: rotate(0deg);"/> -->
+        </div>
+        <div style="color:white;" id="loading-message">
+            Sharpening your Sword...
+        </div>
+    </div>
+</div>
+<div id="crashscreen">
+    <div class="crashcontent">
+        <div class="crashimage"><img width="300px" height="300px"
+                                     src="assets/4531f289c76a086bd41591d97ea62a08.png"/></div>
+        <div class="crashtitle">Unable to enter the Glar universe...</div>
+        <div class="crashtitle">Try you luck and push &darr; button &darr;</div>
+        <div class="crashbutton" onclick="reload();">Try again!</div>
+    </div>
+</div>
+
+<div id="serverfullscreen">
+    <div class="serverfullcontent">
+        <div class="serverfullimage"><img width="300px" height="300px"
+                                          src="assets/4531f289c76a086bd41591d97ea62a08.png"/></div>
+        <div id="serverfullmessage" class="serverfulltitle">Server is full of knights :(</div>
+        <div class="serverfulltitle">Try you luck and push &darr; button &darr;</div>
+        <div class="serverfullbutton" onclick="reload();">Try again!</div>
+    </div>
+</div>
+
+<div id="kickedscreen">
+    <div class="serverfullcontent">
+        <div class="serverfullimage"><img width="300px" height="300px"
+                                          src="assets/4531f289c76a086bd41591d97ea62a08.png"/></div>
+        <div class="serverfulltitle">You have been kicked from server!</div>
+        <div class="serverfulltitle">Just push the &darr; button &darr;</div>
+        <div class="serverfullbutton" onclick="reload();">Reconnect!</div>
+    </div>
+</div>
+
+<div id="game-layout">
+    <div id="ui-hat-list-container">
+        <div class="ui-hat-list-header">
+            Hats
+            <div class="ui-hat-list-close" id="ui-hat-list-close">X</div>
+        </div>
+        <div class="ui-hat-list-content" id="ui-hat-list-content">
+        </div>
+        <div class="ui-hat-list-bottom">
+            <div class="ui-hat-close-button" id="ui-hat-close-button">
+                CLOSE
+            </div>
+        </div>
+    </div>
+    <div id="ui-member-list-container">
+        <div class="ui-team-list-header">
+            Team mates
+            <div class="ui-team-list-close" id="ui-team-list-close">X</div>
+        </div>
+        <div class="ui-member-list-content" id="ui-member-list-content">
+        </div>
+        <div class="ui-member-list-bottom">
+            <div class="ui-leave-button" id="ui-leave-team-button">
+                LEAVE TEAM
+            </div>
+        </div>
+    </div>
+    <div id="ui-team-list-container">
+        <div class="ui-team-list-header">
+            Teams
+            <div class="ui-team-list-close" id="ui-team-list-close">X</div>
+        </div>
+        <div class="ui-team-list-content" id="ui-team-list-content">
+        </div>
+        <div class="ui-team-list-bottom">
+            <input class="ui-input-team-name" id="ui-input-team-name" maxlength="16" placeholder="Unique name"/>
+            <div class="ui-create-button" id="ui-create-team-button">
+                Create team
+            </div>
+        </div>
+    </div>
+    <div id="ui-join-request-list">
+
+    </div>
+
+    <div id="left-panel" class="menu">
+    </div>
+
+    <div id="bottom-left-panel">
+        <div id="chat-container">
+            <div id="chat-messages">
+            </div>
+            <div id="chat-input" style="display: none;">
+                <label for="chat-type">Chat</label>
+                <select name="chat-type" id="chat-type">
+                    <option selected="selected">Local</option>
+                  <option>Server</option>
+                  <option>Team</option>
+                </select>
+                <input type="text" id="chat-textbox" size="40" maxlength="40" autocomplete="off">
+
+            </div>
+
+        </div>
+        <br clear="all" />
+        <div onclick="showSettings();" class="font-button">
+            <i class="fa-solid fa-gear"></i>
+        </div>
+        <div onclick="showInstructions();"  id="show-instructions" class="font-button" style="background-color: rgba(1,157,238,0.4);">
+            <i class="fa-solid fa-circle-question"></i>
+        </div>
+
+        <a target="_blank" id="discord-link" href="https://glar.io/discord-invite" class="font-button"  style="background-color: rgba(87,105,231,0.4);">
+            <i class="fa-brands fa-discord"></i>
+        </a>
+
+        <div onclick="showChat();" class="font-button">
+            <i class="fa-solid fa-comment"></i>
+        </div>
+       
+    </div>
+    <div id="bottom-panel" class="menu">
+        <div id="bottom-panel-build">
+        </div>
+        <div id="bottom-panel-right" class="menu">
+        </div>
+    </div>
+
+    <div id="left-top-container">
+        <div class="ui-stats-resources" id="ui-stats-resources">
+        </div>
+        <br clear="all" />
+        <div id="top-panel" class="menu">
+            <div class="ui-stats-level">
+                <div id="ui-level-bar" class="ui-level-bar" style="width:100%;"><span class="ui-stats-level-text" id="ui-stats-level-text">LEVEL: 1</span></div>
+            </div>
+        </div>
+        
+        
+    </div>
+    <div id="inventory">
+    </div>
+
+    <div id="right-panel" class="menu">
+        <div class="ui-leaderboard" id="leaderboard" style="position:relative;">
+            <div class="ui-leaderboard-player is-header">
+                <span class="player-rank">Rank</span>
+                <span class="player-name">Name</span>
+                <span class="player-score">Score</span>
+            </div>
+        </div>
+
+        <div class="icon-panel">
+            <div class="clock"></div>
+
+        </div>
+        <div id="right-panel-bottom" class="menu">
+        </div>
+
+    </div>
+    
+</div>
+<div id="lobby-layout" class="modal" style="background: url('assets/86b290bb49f971a71ea57e9699a6aa5e.jpg') 50% 50% / cover;">
+    <div class="discord">
+        <a target="_blank" href="https://glar.io/discord-invite"><img
+                    src="assets/19bc2ce6f2904254334fdbe6a0798dbb.svg" width="100px"
+                    height="30px"/></a>
+    </div>
+    <div class="reddit">
+
+    </div>
+
+    <!-- weekly leaderboard modal -->
+
+    <div id="right-panel" title="Weekly Leaderboard" class="small-screen">
+        <div class="ui-leaderboard" id="weekly-leaderboard" style="">
+             <div class="ui-leaderboard-header">
+                <span class="leaderboard-name">Weekly Leaderboard</span>
+            </div>
+
+            <div class="ui-leaderboard-player is-header">
+                <span class="player-rank">Rank</span>
+                <span class="player-name">Name</span>
+                <span class="player-score">Score</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="instructions-dialog" title="How To Play">
+        <div id="instructions-dialog" style="">
+            
+        </div>
+    </div>
+    <div id="store-dialog" title="Diamond Store" style="display: none;">
+
+        <div id="store-tabs">
+            <ul>
+                <li><a href="#store-tab">Diamond Store</a></li>
+                <li><a href="#achievements-tab">Achievements</a></li>
+                <li><a href="#glario-store">Glar.io Store</a></li>
+            </ul>
+            <div id="store-tab">
+                
+                <div id="store-frame">
+                </div>
+                <a href="javascript:void(0);" class="ui-button" onclick="$('#diamond-store').attr( 'src', function ( i, val ) { return val; });;">Refresh Store</a>
+
+                
+
+            </div>
+            <div id="achievements-tab">
+                error-updating, logged in?
+            </div>
+            <script id="share-template" type="text/template">
+            Share glar.io and earn more diamonds:<br />
+            Both you and your friends will each earn diamonds <br />when they join!<br />
+            <ul>
+
+            <li><i class="fa-solid fa-copy"></i> <a id="share-link" href="URL" rel="nofollow" data-copy="URL">URL</a></li>
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u=eURL" target="_blank" rel="nofollow"><i class="fa-brands fa-facebook"></i> Share on Facebook</a></li>
+            <li><a href="https://twitter.com/intent/tweet?text=Check%20out%20Glar.io!&url=eURL" target="_blank" rel="nofollow"><i class="fa-brands fa-twitter"></i>Share on Twitter</a></li>
+            </ul>
+
+            </script>
+
+            <div id="glario-store">
+                Buy more diamonds, VIP Badge, and more in the glar.io store!<br />
+                <a id="store-link" href="https://store.glar.io/" target="_blank">Open Store <i class="fa-solid fa-up-right-from-square"></i> </a><br />
+                <br />
+                <span id="share-content">
+                </span>
+                
+                <br />
+
+            </div>
+            <!-- <div id="settings-interface">
+                <h2>Display Options</h2>
+                  <fieldset>
+                    <legend>Detail Levels: </legend>
+                    <label for="setting-interface-location">Display Location</label>
+                    <input type="checkbox" name="setting-interface-location" id="setting-interface-location">
+                    
+                  </fieldset>
+            </div> -->
+
+        </div>
+           
+       
+    </div>
+    <div id="settings-dialog" title="Settings">
+
+        <div id="settings-tabs">
+            <ul class="tabs">
+                <li><a href="#settings-general">General</a></li>
+                <li><a href="#settings-chat">Chat</a></li>
+                <!-- <li><a href="#settings-interface">Gameplay</a></li> -->
+            </ul>
+            <div id="settings-general">
+                <form id="settings-form">
+                    <fieldset>
+                        <legend>Interface</legend>
+                       <label for="hide-tutorial">Hide Tutorial Buttons</label>
+                       <input type="checkbox" name="hide-tutorial" id="hide-tutorial">
+                       <br />
+                       <label for="shrink-bottom-panel">Shrink bottom panel</label>
+                       <input type="checkbox" name="shrink-bottom-panel" id="shrink-bottom-panel">
+                       
+                     </fieldset>                    
+                <fieldset>
+                    <legend>Testing &amp; Debugging</legend>
+                    Version: d4e9eab
+<br />
+                    <span class="data-user-id"></span>
+                    <br />
+                   <label for="display-location">Display Location</label>
+                   <input type="checkbox" name="display-location" id="display-location">
+                   <br />
+                    <label for="render-canvas">Force Canvas Rendering</label>
+                    <input type="checkbox" name="render-canvas" id="render-canvas">
+                    
+                 </fieldset>
+                 
+                </form>
+            </div>
+            <div id="settings-chat">
+                Muted players:
+                <ul id="mute-list">
+                </ul>
+
+                <a href="javascript:void(0);" class="ui-button" onclick="unmuteAll();">Unmute all</a>
+            </div>
+            <!-- <div id="settings-interface">
+                <h2>Display Options</h2>
+                  <fieldset>
+                    <legend>Detail Levels: </legend>
+                    <label for="setting-interface-location">Display Location</label>
+                    <input type="checkbox" name="setting-interface-location" id="setting-interface-location">
+                    
+                  </fieldset>
+            </div> -->
+
+        </div>
+        
+    </div>
+
+
+    <div id="cross-promo">
+        <!--
+        <iframe id="IOG_CP" scrolling="no" frameborder="0" width="200"
+                height="145" src="https://viral.iogames.space/cp/glar-io"
+                style="border-radius:10px;-webkit-box-shadow:0 3px 6px rgba(0,0,0,.25),0 3px 6px rgba(0,0,0,.4);
+-moz-box-shadow:0 3px 6px rgba(0,0,0,.25),0 3px 6px rgba(0,0,0,.4);
+box-shadow:0 3px 6px rgba(0,0,0,.25),0 3px 6px rgba(0,0,0,.4);">
+        </iframe> -->
+    </div>
+    <div class="motd small-screen" id="motd">
+        <div class="motdtitle">Message Of The Day</div>
+        <div class="motdcontent" id="motdcontent">
+            If you are a Youtuber, simply follow "For Youtubers" link at the bottom of the page!
+        </div>
+        <div class="motdtwitter">
+        </div>
+    </div>
+
+    <div id="featuredyoutuber" class="small-screen">
+       
+    </div>
+    <div id="title-logo">GLAR.IO</div>
+    <div id="subtitle-logo">Ver 0.5.8</div>
+    
+    <div class="container">
+        <div class="card" id="login">
+            <input type="text" id="login-input" placeholder="Enter Name" maxlength="15">
+            <input type="hidden" id="user-token" value="">
+            
+            <label for="server-select">Server:</label>
+            <select id="server-select">
+                <option disabled selected>Loading...</option>
+            </select><br /><br />
+            <script>
+                    $( "#server-select" ).selectmenu();
+            </script>
+            
+
+            <div class="cardButton" id="login-button" data-disabled="true">Connecting..</div>
+
+<!--         </div>
+        <div class="card" style="overflow-y:auto;margin-top:5px; max-height:25vh;"> -->
+ 
+            <!--
+            <p onclick="$( '#weekly-dialog' ).dialog( 'open' );" style="color: blue; cursor:pointer; text-decoration: underline;">Show weekly leaderboard</p>
+            -->
+            
+            <script>
+            /* rotates image at given interval using CSS transform */
+            var i = 0;
+            // var img_rotator = setInterval(function() {
+            //     if (!document.getElementById('preloader')) {
+            //         clearInterval(img_rotator)
+            //     }
+            
+            //     if (i<360) {
+            //         document.getElementById('preloader').style.transform = "rotate("+i+"deg)";
+            //             i=i+6;
+            //         }else{
+            //             i = 0;
+            //         }
+            // }, 75);
+        
+            /* for moving dots on message */
+            var dots=setInterval(function() {
+                var text = document.getElementById('loading-message');
+
+                    if (text.innerHTML.includes('...')) {
+                        text.innerHTML = "Sharpening your Sword"
+                    }else {
+                        text.innerHTML = text.innerHTML+".";
+                    }
+            }, 500);
+            jQuery('body').on('lobby',function(){//loaded
+                clearInterval(dots);
+                clearInterval(img_rotator);
+            });
+            </script>
+            <script>
+//TODO: refactor
+// (flancast90) TODO: do we really need jQuery here? Use fetch preferably
+
+var dialog;
+var block_words=["ass"];
+var badword_regex= new RegExp("\\b("+block_words.join('|')+")\\b", 'gi');
+function removeBadWords(sentence) {
+       
+       return sentence.replace(badword_regex, "*****");
+};
+
+jQuery(document).ready(function(){
+    var wordlang=navigator.language.substring(0,2);
+    $.getJSON("https://glar.io/words/"+wordlang+".json", function (w) {
+        block_words=w;
+        badword_regex = new RegExp("\\b("+block_words.join('|')+")\\b", 'gi');
+        if(wordlang != "en"){ //add english as well
+            $.getJSON("https://glar.io/words/en.json", function (w2) {
+                block_words=block_words.concat(w2);
+                badword_regex = new RegExp("\\b("+block_words.join('|')+")\\b", 'gi');
+            });
+        }
+    });
+    
+});
+function enforceSettings(){
+    let tutorials=['unmount','team','hat','weapon','show-instructions','discord-link'];
+    if(jQuery('#hide-tutorial').prop('checked')){
+        $.each(tutorials,function(i,e){
+            jQuery('#'+e).hide();
+        });
+        
+    } else {
+        $.each(tutorials,function(i,e){
+            jQuery('#'+e).show();
+        });
+
+    }
+    if(jQuery('#shrink-bottom-panel').prop('checked')){
+        jQuery('#bottom-panel').css('scale','0.5');
+        
+    } else {
+        jQuery('#bottom-panel').css('scale','');
+
+    }
+
+}
+jQuery(document).ready(function(){ 
+    jQuery("input[type=checkbox]").checkboxradio();
+    jQuery('#settings-form').submit(function(e){
+        e.preventDefault();
+    });
+    let saved=Cookies.get('settings-form');
+    if(saved){
+        
+        try{
+            let data=JSON.parse(saved);
+            for(let i in data){
+                let kv=data[i];
+                console.log(kv);
+                if(kv['value']=="on"){
+                    jQuery('#settings-form input[name='+kv['name']+']').prop('checked',true);
+                    jQuery('#settings-form input[name='+kv['name']+']').checkboxradio('refresh');    
+                } else {
+                    jQuery('#settings-form input[name='+kv['name']+']').val(kv['value']);
+                }
+            }
+        }catch(ex) {
+            console.log(saved);
+            console.log(ex);
+        }
+        
+    }
+    jQuery('#settings-form :input').change(function(){
+        let data=JSON.stringify(jQuery('#settings-form').serializeArray());
+        Cookies.set('settings-form', data,{domain: '.glar.io'});
+        enforceSettings();
+    });
+    enforceSettings();
+});
+jQuery(document).ready(function(){ 
+    try {
+        let match=new String(window.location.href).match('\\?r=u([0-9]+)')
+        if (match && match[1]){ let rid=parseInt(match[1]);
+          if(!isNaN(rid)) { Cookies.set('refer-uid', rid,{domain: '.glar.io',expires:7});}
+        }
+
+    }catch(ex){}
+});
+
+jQuery(document).ready(function(){ 
+  window.addEventListener("message", function(event) {
+    let data=false;
+    try {
+      data=JSON.parse(event.data);
+    } catch(ex){ return; }
+    switch(data.event){
+      case "close-store":// {"event":"user-update","team_id":-1,"player_id":2252,"network_id":26,"position":{"x":4350,"y":16017,"type":25},"server_id":8}
+      $( '#store-dialog' ).dialog( 'close' );
+      
+      break;
+    }
+
+  // can message back using event.source.postMessage(...)
+});
+});
+
+jQuery(document).ready(function(){
+
+    jQuery.ajax({
+        dataType: "json",
+        url: "https://status.glar.io/user.php",
+        crossDomain: true,
+        xhrFields: {withCredentials: true},
+        success: function(data){
+
+            $('#user-token').val(data['token']);
+            $('#username').val(data['username']);
+            if(data['username'].toString().length > 0){
+                $('#login-input').val(data['username']);
+            }
+            jQuery.getScript("https://app.glar.io/api/auth/user.js?sso="+data['sso']['sso']+"&id="+data['id']+"&expires="+data['sso']['expires']);
+            $('#loggedin').show();
+        }}).fail(function(data){ //not signed in
+            window.user={};
+            $('#login-google').show();
+            
+
+        });
+
+dialog = $( "#user-form" ).dialog({
+      autoOpen: false,
+      modal: true,
+      position: 'center center',
+      buttons: {
+       "Save": function(){
+            var un=$('#username').val();
+            jQuery.ajax({
+                dataType: "json",
+                url: "//status.glar.io/user.php?action=reserve&username="+un,
+                xhrFields: {withCredentials: true},
+                success: function(data){
+                    if(data['username']==un){
+                        $('#username').val(data['username']);
+                        dialog.dialog("close");
+                    } else {
+                        $('#user-form .validateTips').html("This name was taken.");
+                    }
+                    
+                }}).fail(function(data){ //not signed in
+                    dialog.dialog("close");         
+                });
+       },
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        // form[ 0 ].reset();
+        // allFields.removeClass( "ui-state-error" );
+      }
+    });
+$( "a.ui-button" ).button();
+jQuery('body').on('disconnect',function(){
+    dataLayer.push({'event':'disconnect'});
+    gadebug("Disconnect",null);
+});
+
+$( '#settings-dialog' ).dialog({
+        width: 600,
+        autoOpen: false
+    });
+    $('#settings-tabs').tabs();
+    $('#settings-dialog').find('input').checkboxradio();
+    
+});
+
+window.addEventListener("error",function(e) {
+
+   console.log(e);
+   return;
+   let msg=e.message;
+   let f=null;
+   if(e && e.error && e.error.stack){
+      msg+="\n"+e.error.stack.toString();
+      f=e.error.stack;
+   }
+   if(e.filename) { msg+="\n"+e.filename.toString();}
+   if(e.lineno) { msg+=":"+e.lineno.toString();}
+   gaerror(msg,f); 
+
+   var suppressErrorAlert = false;
+   return suppressErrorAlert;
+});
+
+            </script>
+            <hr />
+            <div id="login-google" style="display:none;">
+                <a href="https://status.glar.io/google-auth.php"><img src="https://glar.io/static/google-auth.png"></a>
+                <!-- <br /><a href="https://status.glar.io/discord-auth.php"><img src="https://glar.io/static/discord-auth.png"></a> -->
+            </div>            
+
+            <script type="text/javascript">
+                (function () {
+                    document.getElementById('login-input').addEventListener('keydown', function (e) {
+                        if (e.keyCode === 13) {
+                            // do whatever you want with the value
+                            document.getElementById('login-button').onclick();
+                        }
+                    });
+                })();
+            </script>
+            <div id="loggedin" style="display:none;">
+
+                Welcome back! (<a href="https://status.glar.io/logout.php">logout</a>)<br /><br />
+                <a class="ui-button ui-widget ui-corner-all" href="https://app.glar.io/account" target="_blank" rel="nofollow" >Manage Account <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <br />
+                <div id="user-form" title="User Settings">
+                     <p class="validateTips"></p>
+
+                  <form>
+                    <fieldset>
+                      <label for="name">Reserved Username</label>
+                      <input type="text" name="username" id="username" value="" class="text ui-widget-content ui-corner-all">
+                      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                    </fieldset>
+                  </form>
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+<!--        <a target="_blank" href="/changelog.txt">What's new?</a> -->       
+        <a href="https://glar.io/tutorial/how-to-play/">How to play?</a>
+        <a target="_blank" href="https://glar.io/youtube/">For Youtubers</a>
+        <a href="https://glar.io/hall-of-fame/">Hall of Fame</a>
+        <a target="_blank" class="trackout" href="http://iogames.space" style="display: none;" rel="nofollow">More IO games</a>
+       <br clear="all"/>
+       <div class="small-footer">
+            <a target="_blank" href="https://glar.io/privacy/">Privacy Policy</a>
+            <a target="_blank" href="https://glar.io/tos/">Terms</a>
+        </div>
+    </div>
+
+    <div id="gadmainmenubottom">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- MainPage -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px;"
+     data-ad-client="ca-pub-6339024548739523"
+     data-ad-slot="2450372439"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+     switch(getUrlParameter('v')){
+        case "crazygames":
+        jQuery('#gadmainmenubottom').remove();
+            break;
+            default:
+                break;
+
+     }
+</script>
+
+
+
+    </div>
+</div>
+
+    <!-- <div class="window-darkbox" id="instructions">
+        <div class="bigwindow">
+            <div id="how-to-play" class="wcontent">
+
+            </div>
+            <div class="window-close-button" onclick="hideInstructions();">
+                
+            </div>
+            <div class="window-close-button" onclick="hideInstructions();">
+                Close
+            </div>
+        </div>
+    </div> -->
+
+<div id="common-layout">
+    <div id="ping-container">
+        100 ms
+    </div>
+    <div id="partylink" style="display:none">
+          Create party link
+      </div>
+
+</div>
+<div id="respawn-layout">
+    <div class="window-darkbox" id="respawn-window">
+        <div class="dynastio-banner">
+            
+        </div>
+        <div class="killed-by">
+            <div class="killer"></div>
+            <div class="killer-team"></div>
+        </div>
+        <div class="window">
+            <div class="window-ad">
+                <div id="respawn-ad">
+
+                </div>
+            </div>
+            <div id="respawn-button" class="inactive">
+                Spawn in 5 seconds...
+            </div>
+        </div>
+    </div>
+</div>
+<div id="gamecanvas">
+ <div id="achievement-container"></div>
+</div>
+<div id="gamepad" style="width:100px;height:100px; position:fixed; bottom:20px; z-index:1000; display:none;"></div>
+<script>
+    var joy;
+    jQuery(document).ready(function(){
+        joyStickSetup();
+    });
+</script>
+<script>
+$( function() {
+ //    $( "#weekly-dialog" ).dialog({
+	// autoOpen: false
+ //    });
+});
+</script>
+
+</body>
+</html>
